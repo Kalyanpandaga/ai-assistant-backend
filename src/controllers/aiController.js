@@ -1,6 +1,5 @@
-import { getAiAnswer } from "../services/getAiAnswer.js";
+import getAiAnswer from "../services/getAiAnswer.js";
 import QAAssistant from "../models/QAAssistant.js";
-import { buildPrompt } from "../config/prompt.js";
 
 export const answerQuestion = async (req, res) => {
   const { question } = req.body;
@@ -12,8 +11,7 @@ export const answerQuestion = async (req, res) => {
   }
 
   try {
-    const prompt = buildPrompt(question);
-    const response = await getAiAnswer(prompt);
+    const response = await getAiAnswer(question);
 
     await QAAssistant.create({
       question,
@@ -23,8 +21,9 @@ export const answerQuestion = async (req, res) => {
     res.json({ answer: response.answer });
   } catch (error) {
     console.error("Error fetching AI answer:", error);
-    res
-      .status(500)
-      .json({ answer: "Server error. Please contact Kalyan directly." });
+    res.status(500).json({
+      answer:
+        "Sorry, something went wrong. Please contact Kalyan directly at kalyanlee3@gmail.com or phone: +91-6302473072.",
+    });
   }
 };
