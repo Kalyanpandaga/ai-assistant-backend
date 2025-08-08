@@ -11,10 +11,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
 
-import rateLimiter from "./middleware/rateLimiter.js";
 import aiRoutes from "./routes/aiRoutes.js";
-
-app.use(rateLimiter);
 
 app.use("/api", aiRoutes);
 
