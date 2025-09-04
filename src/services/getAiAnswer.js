@@ -100,7 +100,6 @@ const getAiAnswer = async (question) => {
   }
 
   const rawText = data.choices?.[0]?.message?.content || "";
-  console.log(data);
   let parsed = parseJsonFromText(rawText);
 
   if (!parsed) {
