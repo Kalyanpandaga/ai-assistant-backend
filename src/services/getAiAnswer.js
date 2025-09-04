@@ -83,12 +83,12 @@ const getAiAnswer = async (question) => {
   );
 
   const requestBody = {
-    model: "llama3-8b-8192",
+    model: "openai/gpt-oss-20b",
     messages: [
       { role: "system", content: promptConfig.systemPrompt },
       { role: "user", content: userPromptWithQuestion },
     ],
-    temperature: 0.3,
+    temperature: 1.0,
   };
 
   let data = await fetchWithRetry(requestBody);
@@ -100,6 +100,7 @@ const getAiAnswer = async (question) => {
   }
 
   const rawText = data.choices?.[0]?.message?.content || "";
+  console.log(data);
   let parsed = parseJsonFromText(rawText);
 
   if (!parsed) {
